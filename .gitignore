@@ -1,0 +1,9 @@
+# VS Code files
+.vscode/
+
+# Operating system files
+.DS_Store
+
+# Maven build output
+/target/
+
