@@ -166,13 +166,13 @@ public class ProgramActions {
                     movementHistoryService.addMoveEvent(moveMentSteps);
                     // movementHistoryService.addMoveEvent(validatedSteps(moveMentSteps, startPos, robot.getDirection()));
                 } else {
-                    System.out.println("Floor Dimension should be greater than 0");
+                    System.out.println("Movement StepCount should be greater than 0");
                 }
             } else {
-                System.out.println("Floor Dimension is invalid: ");
+                System.out.println("Movement StepCount is invalid: ");
             }
         } else {
-            System.out.println("Floor Dimension is missing");
+            System.out.println("Movement StepCount is missing");
         }
     }
 
