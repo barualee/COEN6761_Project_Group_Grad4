@@ -93,7 +93,7 @@ public class ProgramActions {
     
     private void callRobotTurnRightFunction(){
         if(robotService.getRobot()!=null){
-            robotService.turnEast();
+            robotService.turnRight();
             movementHistoryService.addRightTurnEvent();
         } else {
             System.out.println("Please initialize Robot first");
@@ -102,7 +102,7 @@ public class ProgramActions {
     
     private void callRobotTurnLeftFunction(){
         if(robotService.getRobot()!=null){
-            robotService.turnWest();
+            robotService.turnLeft();
             movementHistoryService.addLeftTurnEvent();
         } else {
             System.out.println("Please initialize Robot first");
