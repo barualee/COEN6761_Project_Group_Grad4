@@ -71,9 +71,9 @@ public class MovementHistoryService {
             this.robotService = new RobotService(event.getFloorDim());
             this.floorMarkingService = new FloorMarkingService(event.getFloorDim());
         } else if(event.getMovement()==MovementType.LEFT){
-            robotService.turnWest();
+            robotService.turnLeft();
         } else if(event.getMovement()==MovementType.RIGHT){
-            robotService.turnEast();
+            robotService.turnRight();
         } else if(event.getMovement()==MovementType.PENUP){
             robotService.getRobot().setpenUp();
         } else if(event.getMovement()==MovementType.PENDOWN){
