@@ -1,6 +1,9 @@
-package com.coen6761.RobotFloor;
+package com.coen6761.RobotFloorTest;
 
 import com.coen6761.Robot.Directions;
+import com.coen6761.RobotFloor.Floor;
+import com.coen6761.RobotFloor.FloorMarkingService;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

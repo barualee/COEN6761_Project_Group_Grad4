@@ -1,8 +1,11 @@
-package com.coen6761.Robot;
+package com.coen6761.RobotTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import com.coen6761.Robot.Directions;
+import com.coen6761.Robot.Robot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

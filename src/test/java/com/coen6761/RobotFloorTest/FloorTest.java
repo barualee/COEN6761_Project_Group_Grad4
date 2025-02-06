@@ -1,8 +1,10 @@
-package com.coen6761.RobotFloor;
+package com.coen6761.RobotFloorTest;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import com.coen6761.RobotFloor.Floor;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
