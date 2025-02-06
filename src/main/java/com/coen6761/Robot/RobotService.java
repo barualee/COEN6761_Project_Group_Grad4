@@ -69,14 +69,14 @@ public class RobotService{
     // }
 
     //turn left
-    public Robot turnWest(){
+    public Robot turnLeft(){
         Directions direction = robot.getDirection();
         robot.setDirection(directionMappingForLeft(direction));
         return robot;
     }
 
     //turn right
-    public Robot turnEast(){
+    public Robot turnRight(){
         Directions direction = robot.getDirection();
         robot.setDirection(directionMappingForRight(direction));
         return robot;
