@@ -25,6 +25,7 @@ public class RobotTest {
     })
     void testConstructor(int floorDim, int expectedRow, int expectedCol) {
         Robot robot = new Robot(floorDim);
+
         assertEquals(expectedRow, robot.getRow());
         assertEquals(expectedCol, robot.getCol());
         assertTrue(robot.getPenUpStatus());
