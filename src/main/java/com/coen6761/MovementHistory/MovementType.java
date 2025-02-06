@@ -3,5 +3,8 @@ package com.coen6761.MovementHistory;
 public enum MovementType {
     RIGHT,
     LEFT,
-    MOVE
+    MOVE,
+    PENUP,
+    PENDOWN,
+    INITIALIZE
 }
