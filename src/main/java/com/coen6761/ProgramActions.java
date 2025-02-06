@@ -78,6 +78,7 @@ public class ProgramActions {
     private void callPenUpFunction(){
         if(robotService.getRobot()!=null){
             robotService.getRobot().setpenUp();
+            movementHistoryService.addPenUpEvent();
         } else {
             System.out.println("Please initialize Robot first");
         }
@@ -86,6 +87,7 @@ public class ProgramActions {
     private void callPenDownFunction(){
         if(robotService.getRobot()!=null){
             robotService.getRobot().setPenDown();
+            movementHistoryService.addPenDownEvent();
         } else {
             System.out.println("Please initialize Robot first");
         }
@@ -93,8 +95,13 @@ public class ProgramActions {
     
     private void callRobotTurnRightFunction(){
         if(robotService.getRobot()!=null){
+<<<<<<< HEAD
             robotService.turnRight();
             movementHistoryService.addRightTurnEvent();
+=======
+            robotService.turnEast();
+            movementHistoryService.addRightTurnEvent(robotService.getRobot().getPenUpStatus());
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
         } else {
             System.out.println("Please initialize Robot first");
         }
@@ -102,8 +109,13 @@ public class ProgramActions {
     
     private void callRobotTurnLeftFunction(){
         if(robotService.getRobot()!=null){
+<<<<<<< HEAD
             robotService.turnLeft();
             movementHistoryService.addLeftTurnEvent();
+=======
+            robotService.turnWest();
+            movementHistoryService.addLeftTurnEvent(robotService.getRobot().getPenUpStatus());
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
         } else {
             System.out.println("Please initialize Robot first");
         }
@@ -117,6 +129,7 @@ public class ProgramActions {
                     robotService = new RobotService(floorDim);
                     floorMarkingService = new FloorMarkingService(floorDim);
                     movementHistoryService = new MovementHistoryService();
+                    movementHistoryService.addInitializeEvent(floorDim);
 
                     System.out.println("Robot initialized");
                 } else {
@@ -163,7 +176,7 @@ public class ProgramActions {
                             markingTheFloor(startPos, moveMentSteps, Directions.WEST);
                             break;
                     }
-                    movementHistoryService.addMoveEvent(moveMentSteps);
+                    movementHistoryService.addMoveEvent(moveMentSteps, robotService.getRobot().getPenUpStatus());
                     // movementHistoryService.addMoveEvent(validatedSteps(moveMentSteps, startPos, robot.getDirection()));
                 } else {
                     System.out.println("Movement StepCount should be greater than 0");

@@ -5,7 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.*;
+=======
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
 
 public class RobotServiceTest {
     private RobotService robotService;
@@ -19,10 +24,15 @@ public class RobotServiceTest {
     @Test
     void testConstructor() {
         RobotService robotService = new RobotService(10);
+<<<<<<< HEAD
 
         Robot robot = robotService.getRobot();
 
         assertNotNull(robot);
+=======
+        Robot robot = robotService.getRobot();
+
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
         assertEquals(9, robot.getRow());
         assertEquals(0, robot.getCol());
         assertTrue(robot.getPenUpStatus());
@@ -31,6 +41,7 @@ public class RobotServiceTest {
 
     @ParameterizedTest
     @CsvSource({
+<<<<<<< HEAD
             "5, -1, 6", // negative steps
             "5, 0, 5",  // 0 step
             "5, 1, 4",  // 1 step
@@ -38,6 +49,14 @@ public class RobotServiceTest {
             "5, 4, 1",  // edge - 1 step
             "5, 5, 0",  // reach edge
             "5, 6, 0"   // exceed edge
+=======
+            "5, -3, 8", // negative steps
+            "5, 0, 5",  // 0 step
+            "5, 1, 4",  // 1 step
+            "5, 3, 2",  // normal step
+            "5, 5, 0",  // reach edge
+            "5, 8, 0"   // exceed edge
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
     })
     void testMoveWest(int initCol, int steps, int expectedCol) {
         this.robotService.getRobot().setCol(initCol);
@@ -47,6 +66,7 @@ public class RobotServiceTest {
 
     @ParameterizedTest
     @CsvSource({
+<<<<<<< HEAD
             "5, -1, 4",
             "5, 0, 5",
             "5, 1, 6",
@@ -54,6 +74,14 @@ public class RobotServiceTest {
             "5, 3, 8",
             "5, 4, 9",
             "5, 5, 9"
+=======
+            "5, -3, 2",
+            "5, 0, 5",
+            "5, 1, 6",
+            "5, 3, 8",
+            "5, 5, 9",
+            "5, 8, 9"
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
     })
     void testMoveEast(int initCol, int steps, int expectedCol) {
         this.robotService.getRobot().setCol(initCol);
@@ -63,6 +91,7 @@ public class RobotServiceTest {
 
     @ParameterizedTest
     @CsvSource({
+<<<<<<< HEAD
             "5, -1, 6",
             "5, 0, 5",
             "5, 1, 4",
@@ -70,6 +99,14 @@ public class RobotServiceTest {
             "5, 4, 1",
             "5, 5, 0",
             "5, 6, 0"
+=======
+            "5, -3, 8",
+            "5, 0, 5",
+            "5, 1, 4",
+            "5, 3, 2",
+            "5, 5, 0",
+            "5, 8, 0"
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
     })
     void testMoveNorth(int initRow, int steps, int expectedRow) {
         this.robotService.getRobot().setRow(initRow);
@@ -79,6 +116,7 @@ public class RobotServiceTest {
 
     @ParameterizedTest
     @CsvSource({
+<<<<<<< HEAD
             "5, -1, 4",
             "5, 0, 5",
             "5, 1, 6",
@@ -86,6 +124,14 @@ public class RobotServiceTest {
             "5, 3, 8",
             "5, 4, 9",
             "5, 5, 9"
+=======
+            "5, -3, 2",
+            "5, 0, 5",
+            "5, 1, 6",
+            "5, 3, 8",
+            "5, 4, 9",
+            "5, 8, 9"
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
     })
     void testMoveSouth(int initRow, int steps, int expectedRow) {
         this.robotService.getRobot().setRow(initRow);
@@ -102,7 +148,11 @@ public class RobotServiceTest {
     })
     void testTurnLeft(Directions initDir, Directions expectedDir) {
         this.robotService.getRobot().setDirection(initDir);
+<<<<<<< HEAD
         this.robotService.turnLeft();
+=======
+        this.robotService.turnWest();
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
         assertEquals(expectedDir, this.robotService.getRobot().getDirection());
     }
 
@@ -115,7 +165,11 @@ public class RobotServiceTest {
     })
     void testTurnRight(Directions initDir, Directions expectedDir) {
         this.robotService.getRobot().setDirection(initDir);
+<<<<<<< HEAD
         this.robotService.turnRight();
+=======
+        this.robotService.turnEast();
+>>>>>>> 0fccf6796d2971443a374eedbe16e4b67de4362f
         assertEquals(expectedDir, this.robotService.getRobot().getDirection());
     }
 
