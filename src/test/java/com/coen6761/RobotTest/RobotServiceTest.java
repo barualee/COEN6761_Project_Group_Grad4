@@ -3,7 +3,7 @@ package com.coen6761.RobotTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import com.coen6761.Robot.Directions;
 import com.coen6761.Robot.Robot;
@@ -32,15 +32,9 @@ public class RobotServiceTest {
         assertEquals(Directions.NORTH, robot.getDirection());
     }
 
+    // step: <0, =0, =1, normal value, edge-1, reach edge, exceed edge
     @ParameterizedTest
-    @CsvSource({
-            "5, -3, 8", // negative steps
-            "5, 0, 5",  // 0 step
-            "5, 1, 4",  // 1 step
-            "5, 3, 2",  // normal step
-            "5, 5, 0",  // reach edge
-            "5, 8, 0"   // exceed edge
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testMoveWest.csv")
     void testMoveWest(int initCol, int steps, int expectedCol) {
         this.robotService.getRobot().setCol(initCol);
         this.robotService.moveWest(steps);
@@ -48,14 +42,7 @@ public class RobotServiceTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "5, -3, 2",
-            "5, 0, 5",
-            "5, 1, 6",
-            "5, 3, 8",
-            "5, 5, 9",
-            "5, 8, 9"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testMoveEast.csv")
     void testMoveEast(int initCol, int steps, int expectedCol) {
         this.robotService.getRobot().setCol(initCol);
         this.robotService.moveEast(steps);
@@ -63,14 +50,7 @@ public class RobotServiceTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "5, -3, 8",
-            "5, 0, 5",
-            "5, 1, 4",
-            "5, 3, 2",
-            "5, 5, 0",
-            "5, 8, 0"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testMoveNorth.csv")
     void testMoveNorth(int initRow, int steps, int expectedRow) {
         this.robotService.getRobot().setRow(initRow);
         this.robotService.moveNorth(steps);
@@ -78,40 +58,25 @@ public class RobotServiceTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "5, -3, 2",
-            "5, 0, 5",
-            "5, 1, 6",
-            "5, 3, 8",
-            "5, 4, 9",
-            "5, 8, 9"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testMoveSouth.csv")
     void testMoveSouth(int initRow, int steps, int expectedRow) {
         this.robotService.getRobot().setRow(initRow);
         this.robotService.moveSouth(steps);
         assertEquals(expectedRow, this.robotService.getRobot().getRow());
     }
 
+    // N=>W, W=>S, S=>E, E=>N
     @ParameterizedTest
-    @CsvSource({
-            "NORTH, WEST",
-            "WEST, SOUTH",
-            "SOUTH, EAST",
-            "EAST, NORTH"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testTurnLeft.csv")
     void testTurnLeft(Directions initDir, Directions expectedDir) {
         this.robotService.getRobot().setDirection(initDir);
         this.robotService.turnLeft();
         assertEquals(expectedDir, this.robotService.getRobot().getDirection());
     }
 
+    // N=>E, E=>S, S=>W, W=>N
     @ParameterizedTest
-    @CsvSource({
-            "NORTH, EAST",
-            "WEST, NORTH",
-            "SOUTH, WEST",
-            "EAST, SOUTH"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testTurnRight.csv")
     void testTurnRight(Directions initDir, Directions expectedDir) {
         this.robotService.getRobot().setDirection(initDir);
         this.robotService.turnRight();
