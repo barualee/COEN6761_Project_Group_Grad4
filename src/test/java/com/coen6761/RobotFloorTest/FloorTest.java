@@ -2,6 +2,7 @@ package com.coen6761.RobotFloorTest;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import com.coen6761.RobotFloor.Floor;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class FloorTest {
     // test constructor and getFloorArray
     @ParameterizedTest
-    @CsvSource({"1", "10"})
+    @CsvFileSource(resources = "/test_data/RobotFloorTestCases/testConstAndSetToBlanks.csv")
     void testConstAndSetToBlanks(int floorSize) {
         int[][] expectedArray = new int[floorSize][floorSize];
         Floor floor = new Floor(floorSize);

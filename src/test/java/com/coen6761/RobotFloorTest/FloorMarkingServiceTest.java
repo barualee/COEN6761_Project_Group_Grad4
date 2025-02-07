@@ -5,6 +5,7 @@ import com.coen6761.RobotFloor.Floor;
 import com.coen6761.RobotFloor.FloorMarkingService;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FloorMarkingServiceTest {
     @ParameterizedTest
-    @CsvSource({"1", "10"})
+    @CsvFileSource(resources = "/test_data/RobotFloorTestCases/testConstructor.csv")
     void testConstructor(int floorDim) {
         FloorMarkingService floorMarkingService = new FloorMarkingService(floorDim);
 
@@ -24,39 +25,7 @@ public class FloorMarkingServiceTest {
     // direction: NORTH, EAST, SOUTH, WEST
     // step: <0, =0, =1, normal value, edge-1, reach edge, exceed edge
     @ParameterizedTest
-    @CsvSource({
-            "NORTH, 5, 5, -1",
-            "NORTH, 5, 5, 0",
-            "NORTH, 5, 5, 1",
-            "NORTH, 5, 5, 2",
-            "NORTH, 5, 5, 4",
-            "NORTH, 5, 5, 5",
-            "NORTH, 5, 5, 6",
-
-            "SOUTH, 5, 5, -1",
-            "SOUTH, 5, 5, 0",
-            "SOUTH, 5, 5, 1",
-            "SOUTH, 5, 5, 2",
-            "SOUTH, 5, 5, 3",
-            "SOUTH, 5, 5, 4",
-            "SOUTH, 5, 5, 5",
-
-            "EAST, 5, 5, -1",
-            "EAST, 5, 5, 0",
-            "EAST, 5, 5, 1",
-            "EAST, 5, 5, 2",
-            "EAST, 5, 5, 3",
-            "EAST, 5, 5, 4",
-            "EAST, 5, 5, 5",
-
-            "SOUTH, 5, 5, -1",
-            "SOUTH, 5, 5, 0",
-            "SOUTH, 5, 5, 1",
-            "SOUTH, 5, 5, 2",
-            "SOUTH, 5, 5, 4",
-            "SOUTH, 5, 5, 5",
-            "SOUTH, 5, 5, 6",
-    })
+    @CsvFileSource(resources = "/test_data/RobotFloorTestCases/testMarkFloor.csv")
     void testMarkFloor(String dir, int startRow, int startCol, int steps) {
         int floorDim = 10;
         FloorMarkingService floorMarkingService = new FloorMarkingService(floorDim);

@@ -2,7 +2,7 @@ package com.coen6761.RobotTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import com.coen6761.Robot.Directions;
 import com.coen6761.Robot.Robot;
@@ -20,12 +20,9 @@ public class RobotTest {
 
     // test constructor, getRow, getCol, getPenUpStatus, getDirection
     // use local robot
+    // floorDim = 10, 3, 1
     @ParameterizedTest
-    @CsvSource({
-            "10, 9, 0",
-            "3, 2, 0",
-            "1, 0, 0"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testConstructor.csv")
     void testConstructor(int floorDim, int expectedRow, int expectedCol) {
         Robot robot = new Robot(floorDim);
         assertEquals(expectedRow, robot.getRow());
@@ -35,47 +32,38 @@ public class RobotTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"0", "5", "9"})
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testSetRow.csv")
     void testSetRow(int row) {
         this.robot.setRow(row);
         assertEquals(row, this.robot.getRow());
     }
 
     @ParameterizedTest
-    @CsvSource({"0", "5", "9"})
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testSetCol.csv")
     void testSetCol(int col) {
         this.robot.setCol(col);
         assertEquals(col, this.robot.getCol());
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "NORTH",
-            "EAST",
-            "SOUTH",
-            "WEST"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testSetDirection.csv")
     void testSetDirection(Directions direction) {
         this.robot.setDirection(direction);
         assertEquals(direction, this.robot.getDirection());
     }
 
+    // penUp => penDown, penDown => penDown
     @ParameterizedTest
-    @CsvSource({
-            "true, false",
-            "false, false"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testSetPenDown.csv")
     void testSetPenDown(boolean initialPenUp, boolean expectedPenUp) {
         if (!initialPenUp) this.robot.setpenUp();
         this.robot.setPenDown();
         assertEquals(expectedPenUp, this.robot.getPenUpStatus());
     }
 
+    // penUp => penUp, penDown => penUp
     @ParameterizedTest
-    @CsvSource({
-            "true, true",
-            "false, true"
-    })
+    @CsvFileSource(resources = "/test_data/RobotTestCases/testSetPenUp.csv")
     void testSetPenUp(boolean initialPenUp, boolean expectedPenUp) {
         if (!initialPenUp) this.robot.setPenDown();
         this.robot.setpenUp();
