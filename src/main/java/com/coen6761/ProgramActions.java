@@ -135,7 +135,8 @@ public class ProgramActions {
 
     private void callCurrentPositionFunction(){
         if(robotService.getRobot()!=null){
-            robotService.getRobot().printRobotStatus();
+            String curPosStr = robotService.getRobot().printRobotStatus();
+            System.out.println(curPosStr);
         } else {
             System.out.println("Please initialize Robot first");
         }

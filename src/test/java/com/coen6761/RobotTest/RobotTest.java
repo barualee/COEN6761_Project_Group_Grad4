@@ -1,11 +1,11 @@
 package com.coen6761.RobotTest;
 
+import com.coen6761.Robot.Directions;
+import com.coen6761.Robot.Robot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-
-import com.coen6761.Robot.Directions;
-import com.coen6761.Robot.Robot;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -56,7 +56,7 @@ public class RobotTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/test_data/RobotTestCases/testSetPenDown.csv")
     void testSetPenDown(boolean initialPenUp, boolean expectedPenUp) {
-        if (!initialPenUp) this.robot.setpenUp();
+        if (!initialPenUp) this.robot.setPenDown();
         this.robot.setPenDown();
         assertEquals(expectedPenUp, this.robot.getPenUpStatus());
     }
@@ -68,5 +68,20 @@ public class RobotTest {
         if (!initialPenUp) this.robot.setPenDown();
         this.robot.setpenUp();
         assertEquals(expectedPenUp, this.robot.getPenUpStatus());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "true",
+            "false"
+    })
+    void testPrintRobotStatus(boolean isPenUp){
+        if (!isPenUp) this.robot.setPenDown();
+
+        String resultTxt = this.robot.printRobotStatus();
+
+        assertTrue(resultTxt.contains("Current Bot Position: [00]"));
+        assertTrue(resultTxt.contains(String.format("Current Pen Position: %s", this.robot.getPenUpStatus() ? "Pen Up" : "Pen Down")));
+        assertTrue(resultTxt.contains("Current Bot Direction: NORTH"));
     }
 }

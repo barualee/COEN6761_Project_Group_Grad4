@@ -56,9 +56,12 @@ public class Robot {
         return direction;
     }
 
-    public void printRobotStatus(){
-        System.out.println("Current Bot Position: [" + col + (floorDim - row) + "]");
-        System.out.println("Current Pen Position: " + (penUp == true ? "Pen Up" : "Pen Down"));
-        System.out.println("Current Bot Direction: " + direction);
+    public String printRobotStatus(){
+//        System.out.println("Current Bot Position: [" + col + (floorDim - row) + "]");
+//        System.out.println("Current Pen Position: " + (penUp == true ? "Pen Up" : "Pen Down"));
+//        System.out.println("Current Bot Direction: " + direction);
+        return "Current Bot Position: [" + col + (floorDim - row) + "]\n" +
+                "Current Pen Position: " + (penUp ? "Pen Up" : "Pen Down") + "\n" +
+                "Current Bot Direction: " + direction;
     }
 }
