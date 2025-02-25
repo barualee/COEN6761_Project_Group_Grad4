@@ -59,82 +59,90 @@ public class ProgramActions {
     }
 
     private void displayMovementHistory(){
-        if(movementHistoryService.getMovementList()!=null){
+        if(movementHistoryService!=null && movementHistoryService.getMovementList()!=null){
             movementHistoryService.display();
         } else {
-            System.out.println("Please initialise robot first");
+            System.out.println("Please initialize Robot first");
         }
     }
     
     private void printFloorFunction(){        
-        if(floorMarkingService.getFloor()!=null){
+        if(floorMarkingService!=null && floorMarkingService.getFloor()!=null){
             int[] robotCoordinates = new int[] {robotService.getRobot().getRow(), robotService.getRobot().getCol()};
             floorMarkingService.printFloorFunction(robotCoordinates, robotService.getRobot().getDirection());
         } else {
-            System.out.println("Please initiliase the Robot first");
+            System.out.println("Please initialize Robot first");
         }
     }
     
     private void callPenUpFunction(){
-        if(robotService.getRobot()!=null){
+        if(robotService!=null && robotService.getRobot()!=null){
             robotService.getRobot().setpenUp();
             movementHistoryService.addPenUpEvent();
+            System.out.println("Robot Pen Set to Up");
         } else {
             System.out.println("Please initialize Robot first");
         }
     }
     
     private void callPenDownFunction(){
-        if(robotService.getRobot()!=null){
+        if(robotService!=null && robotService.getRobot()!=null){
             robotService.getRobot().setPenDown();
             movementHistoryService.addPenDownEvent();
+            System.out.println("Robot Pen Set to Down");
         } else {
             System.out.println("Please initialize Robot first");
         }
     }
     
     private void callRobotTurnRightFunction(){
-        if(robotService.getRobot()!=null){
+        if(robotService!=null && robotService.getRobot()!=null){
             robotService.turnRight();
             movementHistoryService.addRightTurnEvent(robotService.getRobot().getPenUpStatus());
+            System.out.println("Robot Turned Right");
         } else {
             System.out.println("Please initialize Robot first");
         }
     }
     
     private void callRobotTurnLeftFunction(){
-        if(robotService.getRobot()!=null){
+        if(robotService!=null && robotService.getRobot()!=null){
             robotService.turnLeft();
             movementHistoryService.addLeftTurnEvent(robotService.getRobot().getPenUpStatus());
+            System.out.println("Robot Turned Left");
         } else {
             System.out.println("Please initialize Robot first");
         }
     }
     
     private void callInitialiseFunction(String[] commands){
-        if(HelperFunctions.IntegerExist(commands)){
-            int floorDim = HelperFunctions.isValidInteger(commands[1]);
-            if(floorDim != -1){
-                if(HelperFunctions.isIntegergreaterThanZero(floorDim)){
-                    robotService = new RobotService(floorDim);
-                    floorMarkingService = new FloorMarkingService(floorDim);
-                    movementHistoryService = new MovementHistoryService();
-                    movementHistoryService.addInitializeEvent(floorDim);
-
-                    System.out.println("Robot initialized");
-                } else {
-                    System.out.println("Floor Dimension should be greater than 0");
-                }
-            } else {
-                System.out.println("Floor Dimension is invalid: ");
-            }
-        } else {
-            System.out.println("Floor Dimension is missing");
+        if(!HelperFunctions.IntegerExist(commands)){
+        	System.out.println("Floor Dimension is missing");
+        	return;
         }
+        
+        int floorDim = HelperFunctions.isValidInteger(commands[1]);
+        if(floorDim == -1){
+        	System.out.println("Floor Dimension is invalid: ");
+        }
+        
+        
+        if(!HelperFunctions.isIntegergreaterThanZero(floorDim)){
+        	System.out.println("Floor Dimension should be greater than 0");
+        	return;
+        }
+        
+        robotService = new RobotService(floorDim);
+        floorMarkingService = new FloorMarkingService(floorDim);
+        movementHistoryService = new MovementHistoryService();
+        movementHistoryService.addInitializeEvent(floorDim);
+
+        System.out.println("Robot initialized");
     }
+    
 
     private void callCurrentPositionFunction(){
-        if(robotService.getRobot()!=null){
+        if(robotService!=null && robotService.getRobot()!=null){
             String curPosStr = robotService.getRobot().printRobotStatus();
             System.out.println(curPosStr);
         } else {
@@ -143,41 +151,50 @@ public class ProgramActions {
     }
 
     private void moveRobotFunction(String[] commands){
-        if(HelperFunctions.IntegerExist(commands)){
-            int moveMentSteps = HelperFunctions.isValidInteger(commands[1]);
-            if(moveMentSteps != -1){
-                if(HelperFunctions.isIntegergreaterThanZero(moveMentSteps)){
-                    Robot robot = robotService.getRobot();
-                    int[] startPos = new int[]{robot.getRow(), robot.getCol()};
-                    switch (robot.getDirection()) {
-                        case NORTH:
-                            robotService.moveNorth(moveMentSteps);
-                            markingTheFloor(startPos, moveMentSteps, Directions.NORTH);
-                            break;
-                        case SOUTH:
-                            robotService.moveSouth(moveMentSteps);
-                            markingTheFloor(startPos, moveMentSteps, Directions.SOUTH);
-                            break;
-                        case EAST:
-                            robotService.moveEast(moveMentSteps);
-                            markingTheFloor(startPos, moveMentSteps, Directions.EAST);
-                            break;
-                        case WEST:
-                        robotService.moveWest(moveMentSteps);
-                            markingTheFloor(startPos, moveMentSteps, Directions.WEST);
-                            break;
-                    }
-                    movementHistoryService.addMoveEvent(moveMentSteps, robotService.getRobot().getPenUpStatus());
-                    // movementHistoryService.addMoveEvent(validatedSteps(moveMentSteps, startPos, robot.getDirection()));
-                } else {
-                    System.out.println("Movement StepCount should be greater than 0");
-                }
-            } else {
-                System.out.println("Movement StepCount is invalid: ");
-            }
-        } else {
-            System.out.println("Movement StepCount is missing");
+        if(!HelperFunctions.IntegerExist(commands)){
+        	System.out.println("Movement StepCount is missing");
+        	return;
         }
+        
+    	int moveMentSteps = HelperFunctions.isValidInteger(commands[1]);
+        if(moveMentSteps == -1){
+        	System.out.println("Movement StepCount is invalid: ");
+        	return;
+        }
+        
+        if(!HelperFunctions.isIntegergreaterThanZero(moveMentSteps)){
+        	System.out.println("Movement StepCount should be greater than 0");
+        	return;
+        }
+        
+        if(robotService==null || robotService.getRobot()==null) {
+        	System.out.println("Please initialize Robot first");
+        	return;
+        }
+        
+        Robot robot = robotService.getRobot();
+        int[] startPos = new int[]{robot.getRow(), robot.getCol()};
+        switch (robot.getDirection()) {
+            case NORTH:
+                robotService.moveNorth(moveMentSteps);
+                markingTheFloor(startPos, moveMentSteps, Directions.NORTH);
+                break;
+            case SOUTH:
+                robotService.moveSouth(moveMentSteps);
+                markingTheFloor(startPos, moveMentSteps, Directions.SOUTH);
+                break;
+            case EAST:
+                robotService.moveEast(moveMentSteps);
+                markingTheFloor(startPos, moveMentSteps, Directions.EAST);
+                break;
+            case WEST:
+            robotService.moveWest(moveMentSteps);
+                markingTheFloor(startPos, moveMentSteps, Directions.WEST);
+                break;
+        }
+        movementHistoryService.addMoveEvent(moveMentSteps, robotService.getRobot().getPenUpStatus());
+        System.out.println("Movement recorded");
+        // movementHistoryService.addMoveEvent(validatedSteps(moveMentSteps, startPos, robot.getDirection()));
     }
 
     // private int validatedSteps(int moveMentSteps, int[] startPos, Directions direction){

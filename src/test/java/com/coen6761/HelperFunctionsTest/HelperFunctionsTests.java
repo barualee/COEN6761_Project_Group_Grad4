@@ -10,7 +10,8 @@ public class HelperFunctionsTests {
 
     @Test
     public void testIntegerExist() {
-        String[] validCommands = {"command1", "command2"};
+        HelperFunctions h = new HelperFunctions();
+    	String[] validCommands = {"command1", "command2"};
         String[] invalidCommands = {"command1"};
 
         assertTrue(HelperFunctions.IntegerExist(validCommands));
