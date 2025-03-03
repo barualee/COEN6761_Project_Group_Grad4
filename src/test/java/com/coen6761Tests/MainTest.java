@@ -11,7 +11,18 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+@BeforeEach
+public void setUpStreams() {
+    System.setOut(new PrintStream(outContent));
+}
 
+@AfterEach
+public void restoreStreams() {
+    System.setOut(originalOut);
+    if (originalIn != null) {
+        System.setIn(System.in);
+    }
+}
     @ParameterizedTest
     @CsvFileSource(resources = "", numLinesToSkip = 1)
     public void testGameScenarios(String input, String expectedOutput, String testDescription) {
