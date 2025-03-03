@@ -37,6 +37,7 @@ public class ProgramActionsTests {
 	   "C,Please initialize Robot first",
 	   "H,Please initialize Robot first",
 	   "P,Please initialize Robot first",
+	   "M 6,Please initialize Robot first"
 	   
     })	
 	public void TestProgramActions(String input, String output) {
