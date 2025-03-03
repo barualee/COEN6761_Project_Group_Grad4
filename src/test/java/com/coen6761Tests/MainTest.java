@@ -30,7 +30,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/test_data/MainTestCases/basicCommands.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "", numLinesToSkip = 1)
     public void testGameScenarios(String input, String expectedOutput, String testDescription) {
         String processedInput = input.replace("\\n", "\n");
         ByteArrayInputStream in = new ByteArrayInputStream(processedInput.getBytes());
