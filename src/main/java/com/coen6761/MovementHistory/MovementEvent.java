@@ -31,7 +31,16 @@ public class MovementEvent {
     public int getFloorDim() {
         return floorDim;
     }
-   
+    @Override
+    public String toString() {
+        if(movement == MovementType.INITIALIZE){
+            return "MovementEvent: [ Action = " + movement + ", floorDim = " + floorDim + " ]";
+        }
+        if(stepCount != -1){
+            return "MovementEvent: [ Movement = " + movement + ", stepCount = " + stepCount + " ]";
+        }
+        return "MovementEvent: [ Action = " + movement + " ]";
+    }
 
     
 }
