@@ -11,23 +11,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class MainTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final ByteArrayInputStream originalIn = null;
-
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        if (originalIn != null) {
-            System.setIn(System.in);
-        }
-    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "", numLinesToSkip = 1)
