@@ -11,31 +11,37 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-@BeforeEach
-public void setUpStreams() {
-    System.setOut(new PrintStream(outContent));
-}
+public class MainTest {
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final ByteArrayInputStream originalIn = null;
 
-@AfterEach
-public void restoreStreams() {
-    System.setOut(originalOut);
-    if (originalIn != null) {
-        System.setIn(System.in);
+    @BeforeEach
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
     }
-}
+
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalOut);
+        if (originalIn != null) {
+            System.setIn(System.in);
+        }
+    }
+
     @ParameterizedTest
-    @CsvFileSource(resources = "", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/test_data/MainTestCases/basicCommands.csv", numLinesToSkip = 1)
     public void testGameScenarios(String input, String expectedOutput, String testDescription) {
         String processedInput = input.replace("\\n", "\n");
         ByteArrayInputStream in = new ByteArrayInputStream(processedInput.getBytes());
         System.setIn(in);
-        
+
         Main.main(new String[]{});
-        
+
         String output = outContent.toString();
         String[] expectedOutputs = expectedOutput.split("\\|");
         for (String expected : expectedOutputs) {
             assert(output.contains(expected));
         }
     }
-} 
+}
